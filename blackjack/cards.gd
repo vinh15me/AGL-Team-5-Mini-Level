@@ -1,7 +1,9 @@
+
 enum Suit { Hearts, Diamonds, Clubs, Spades }
 enum Rank { Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King }
 enum HandStatus { Playing, Bust, Blackjack }
 enum RoundOutcome { PlayerWin, DealerWin, Draw, InProgress }
+
 
 class Card extends RefCounted:
 	var rank: Rank
@@ -10,7 +12,12 @@ class Card extends RefCounted:
 	func _init(s: Suit, r: Rank) -> void:
 		rank = r
 		suit = s
+		
+	func _check_card() -> void:
+		print_debug(Suit.keys()[suit])
+		print_debug(Rank.keys()[rank])
 	
+		
 class Deck extends RefCounted:
 	var cards: Array[Card]
 	
@@ -39,7 +46,7 @@ class Hand extends RefCounted:
 	
 	func _calc_value(card: Card, count_ace: bool = true):
 		# need to handle whether Ace is 11 or 1 
-		if card.rank == 1 and count_ace:
+		if card.rank == 0 and count_ace:
 			return 11
 		elif card.rank > 9:
 			return 10
@@ -81,6 +88,10 @@ class Hand extends RefCounted:
 #class House extends Player:
 
 class Round extends RefCounted:
+	
+	signal player_card_drawn(suit, rank, index)
+	var player_or_dealer: int = 0
+	
 	var deck: Deck
 	var player_hand: Hand
 	var dealer_hand: Hand
@@ -100,9 +111,13 @@ class Round extends RefCounted:
 		var give_cards = func (hand: Hand) -> void:
 			for i in range(0, 2):
 				var card = self.deck.draw()
+				card._check_card()
 				hand.push_card(card)
+				player_card_drawn.emit( Suit.keys()[card.suit],Rank.keys()[card.rank],player_or_dealer)
 		give_cards.call(player_hand)
+		player_or_dealer = 1
 		give_cards.call(dealer_hand)
+		player_or_dealer = 0
 		
 		self.playing_hand = self.dealer_hand
 	
@@ -148,10 +163,13 @@ class Round extends RefCounted:
 	func hit() -> RoundOutcome:
 		var card = self.deck.draw()
 		self.playing_hand.push_card(card)
+		card._check_card()
+		player_card_drawn.emit(Suit.keys()[card.suit],Rank.keys()[card.rank],player_or_dealer)
 		return self.eval_action()
 	
 	# repeat until hit >=17
 	func dealer_play() -> RoundOutcome:
+		player_or_dealer = 1;
 		var val = self.playing_hand.value()
 		if (val < 17): # <= 17 depending on house rules
 			var outcome = self.hit()
@@ -171,9 +189,16 @@ class Round extends RefCounted:
 class Game extends RefCounted:
 	var currentRound: Round
 	
+	signal send_data_to_main(suit: String, rank: String, player_or_dealer: int)
+
 	func _init():
 		currentRound = Round.new()
+		currentRound.player_card_drawn.connect(_sending_to_main)
 		print_debug("round is starting")
+		
+	func _sending_to_main(suit: String, rank: String, player_or_dealer: int):
+		send_data_to_main.emit(suit,rank,player_or_dealer)
+		
 		
 	func can_player_play():
 		return currentRound.is_player_turn

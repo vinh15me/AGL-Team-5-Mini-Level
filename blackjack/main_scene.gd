@@ -3,6 +3,24 @@ extends Node2D
 const blackjackGame = preload("res://cards.gd")
 var game = blackjackGame.Game.new()
 
+signal send_data_to_player(suit: String, rank: String)
+signal send_data_to_dealer(suit: String, rank: String)
+
+func _ready():
+	game.send_data_to_main.connect(_send_to_display)
+	
+func _send_to_display(suit: String, rank: String, player_or_dealer: int):
+	print("suit " + suit)
+	print("rank " + rank)
+	print("player or dealer " + str(player_or_dealer))
+	print("in main")
+	if player_or_dealer == 0:
+		print("going to player")
+		send_data_to_player.emit(suit,rank)
+	else:
+		print("going to dealer")
+		send_data_to_dealer.emit(suit,rank)
+
 func update_turn():
 	var turn_text: String
 	if (game.currentRound.is_player_turn):
@@ -35,9 +53,11 @@ func append_history(s: String) -> void:
 func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 	var historyEntry: String
 	if (outcome == blackjackGame.RoundOutcome.InProgress):
+		print("game ended in draw")
 		return "the game continues"
 	
 	if (outcome == blackjackGame.RoundOutcome.Draw):
+		print("game ended in draw")
 		return "game ended in draw"
 	
 	var was_natural = game.currentRound.turns == 0
@@ -59,6 +79,7 @@ func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 			if (was_natural):
 				historyEntry += "natural "
 			historyEntry += "blackjack."
+	print(historyEntry)
 	return historyEntry
 
 func _on_start_button_pressed() -> void:
