@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bt6ofygv6cssg"]
+[gd_scene load_steps=21 format=3 uid="uid://bt6ofygv6cssg"]
 
 [ext_resource type="Script" uid="uid://de0gd1onox2n" path="res://main_scene.gd" id="1_0f027"]
 [ext_resource type="Texture2D" uid="uid://bop6e8118igrp" path="res://Asset-Scripts/decrease.png" id="2_66tet"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" uid="uid://bnikl0wfxvhs5" path="res://Asset-Scripts/Card/dealer_card_display.gd" id="4_d5x1h"]
 [ext_resource type="Texture2D" uid="uid://cl0kpo2fo2yyi" path="res://Asset-Scripts/start.png" id="6_7ycvg"]
 [ext_resource type="Texture2D" uid="uid://ceei6a2uk01qe" path="res://Asset-Scripts/try again.png" id="7_wr18j"]
+[ext_resource type="Texture2D" uid="uid://dgrg72khwy4ku" path="res://Asset-Scripts/you lose.png" id="11_mo76n"]
+[ext_resource type="Texture2D" uid="uid://c45804bxje066" path="res://Asset-Scripts/you win.png" id="11_qwutr"]
+[ext_resource type="Texture2D" uid="uid://kc1dcmasddiw" path="res://Asset-Scripts/you tied.png" id="12_42l1d"]
+[ext_resource type="Texture2D" uid="uid://qabr0qmvxe22" path="res://Asset-Scripts/Background/hopefully background.png" id="15_m35m6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wr18j"]
 
@@ -25,6 +29,17 @@
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_0f027")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1700, 0)
+autoscroll = Vector2(-50, 0)
+repeat_times = 7
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(885, 324.99997)
+scale = Vector2(0.59, 0.59)
+texture = ExtResource("15_m35m6")
 
 [node name="PlayerDisplay" type="Node2D" parent="."]
 script = ExtResource("2_gyfs4")
@@ -124,18 +139,19 @@ offset_bottom = 40.0
 
 [node name="BetLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 63.0
-offset_top = 553.0
+offset_left = 63.000004
+offset_top = 529.0
 offset_right = 103.0
-offset_bottom = 576.0
+offset_bottom = 552.0
+scale = Vector2(2.5, 2.5)
 text = "1"
 
 [node name="DecreaseBet" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 43.0
-offset_top = 576.0
+offset_top = 584.0
 offset_right = 243.0
-offset_bottom = 776.0
+offset_bottom = 784.0
 scale = Vector2(0.25, 0.25)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
 icon = ExtResource("2_66tet")
@@ -143,9 +159,9 @@ icon = ExtResource("2_66tet")
 [node name="IncreaseBet" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 43.0
-offset_top = 506.0
+offset_top = 487.0
 offset_right = 243.0
-offset_bottom = 706.0
+offset_bottom = 687.0
 scale = Vector2(0.25, 0.25)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qwutr")
 icon = ExtResource("3_7ycvg")
@@ -190,10 +206,10 @@ text = "0"
 
 [node name="History" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 963.0
-offset_top = 78.0
-offset_right = 1076.0
-offset_bottom = 101.0
+offset_left = 1165.0
+offset_top = 20.0
+offset_right = 1278.0
+offset_bottom = 43.0
 text = "Round history:"
 
 [node name="HitButton" type="Button" parent="Control"]
@@ -227,12 +243,31 @@ scale = Vector2(0.5, 0.5)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_671wp")
 icon = ExtResource("6_7ycvg")
 
+[node name="HighestLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 944.0
+offset_top = 58.0
+offset_right = 1008.0
+offset_bottom = 81.0
+scale = Vector2(2, 2)
+text = "Highest:"
+
+[node name="HighestMoney" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1076.0
+offset_top = 59.0
+offset_right = 1116.0
+offset_bottom = 82.0
+scale = Vector2(2, 2)
+text = "1"
+
 [node name="MoneyLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 1018.0
+offset_left = 959.0
 offset_top = 14.0
-offset_right = 1075.0
+offset_right = 1016.0
 offset_bottom = 37.0
+scale = Vector2(2, 2)
 text = "Money:"
 
 [node name="CurrentMoney" type="Label" parent="Control"]
@@ -241,6 +276,7 @@ offset_left = 1078.0
 offset_top = 15.0
 offset_right = 1118.0
 offset_bottom = 38.0
+scale = Vector2(2, 2)
 text = "1"
 
 [node name="TryAgainButton" type="Button" parent="Control"]
@@ -254,12 +290,28 @@ scale = Vector2(0.75, 0.75)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mo76n")
 icon = ExtResource("7_wr18j")
 
-[node name="Label" type="Label" parent="Control"]
+[node name="YouLose" type="Sprite2D" parent="Control"]
+visible = false
+position = Vector2(940, 500)
+texture = ExtResource("11_mo76n")
+
+[node name="YouTied" type="Sprite2D" parent="Control"]
+visible = false
+position = Vector2(940, 500)
+texture = ExtResource("12_42l1d")
+
+[node name="YouWin" type="Sprite2D" parent="Control"]
+visible = false
+position = Vector2(940, 500)
+texture = ExtResource("11_qwutr")
+
+[node name="MoneySymbolLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 52.0
-offset_top = 553.0
-offset_right = 92.0
-offset_bottom = 576.0
+offset_left = 38.000004
+offset_top = 528.0
+offset_right = 78.0
+offset_bottom = 551.0
+scale = Vector2(2.5, 2.5)
 text = "$"
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -16,6 +16,7 @@ func _ready():
 	
 func update_money():
 	$Control/CurrentMoney.text = str(Globals.money)
+	$Control/HighestMoney.text = str(Globals.high_money)
 	
 func _send_to_display(suit: String, rank: String, player_or_dealer: int):
 	print("suit " + suit)
@@ -80,6 +81,9 @@ func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 		Globals.earn(currentBet)
 		update_money()
 		$Control/TryAgainButton.visible = true
+		$Control/HitButton.visible = false
+		$Control/StandButton.visible = false
+		$Control/YouTied.visible = true
 		return "game ended in draw"
 	
 	var was_natural = game.currentRound.turns == 0
@@ -93,6 +97,7 @@ func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 			if (was_natural):
 				historyEntry += "natural "
 			historyEntry += "blackjack."
+		$Control/YouWin.visible = true
 	elif (outcome == blackjackGame.RoundOutcome.DealerWin):
 		var player_hand_status = game.currentRound.player_hand.analyze()
 		historyEntry = "Dealer won "
@@ -102,9 +107,12 @@ func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 			if (was_natural):
 				historyEntry += "natural "
 			historyEntry += "blackjack."
+		$Control/YouLose.visible = true
 	print(historyEntry)
 	update_money()
 	$Control/TryAgainButton.visible = true
+	$Control/HitButton.visible = false
+	$Control/StandButton.visible = false
 	return historyEntry
 	
 func _on_try_again_button_pressed() -> void:
