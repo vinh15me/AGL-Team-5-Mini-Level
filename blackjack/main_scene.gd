@@ -10,6 +10,8 @@ signal send_data_to_dealer(suit: String, rank: String)
 func _ready():
 	game.send_data_to_main.connect(_send_to_display)
 	Globals._ensure_minimum()
+	$Control/HitButton.visible = false
+	$Control/StandButton.visible = false
 	update_money()
 	
 func update_money():
@@ -118,3 +120,7 @@ func _on_start_button_pressed() -> void:
 	update_turn()
 	update_money()
 	$Control/StartButton.visible = false
+	$Control/DecreaseBet.visible = false
+	$Control/IncreaseBet.visible = false
+	$Control/HitButton.visible = true
+	$Control/StandButton.visible = true

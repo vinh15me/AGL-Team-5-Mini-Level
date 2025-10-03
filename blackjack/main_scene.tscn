@@ -1,137 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt6ofygv6cssg"]
+[gd_scene load_steps=17 format=3 uid="uid://bt6ofygv6cssg"]
 
 [ext_resource type="Script" uid="uid://de0gd1onox2n" path="res://main_scene.gd" id="1_0f027"]
+[ext_resource type="Texture2D" uid="uid://bop6e8118igrp" path="res://Asset-Scripts/decrease.png" id="2_66tet"]
 [ext_resource type="Script" uid="uid://nb3oo0272aju" path="res://Asset-Scripts/Card/player_card_display.gd" id="2_gyfs4"]
+[ext_resource type="Texture2D" uid="uid://bik555my7r54u" path="res://Asset-Scripts/hit.png" id="2_hq1ik"]
+[ext_resource type="Texture2D" uid="uid://dn6746a8aqxri" path="res://Asset-Scripts/increase.png" id="3_7ycvg"]
 [ext_resource type="Texture2D" uid="uid://blxhek610du5l" path="res://Asset-Scripts/Card/Card Assets/Ace of Clubs.png" id="3_d5x1h"]
+[ext_resource type="Texture2D" uid="uid://5oiso5suerbx" path="res://Asset-Scripts/stand.png" id="3_nfk4m"]
 [ext_resource type="Script" uid="uid://bnikl0wfxvhs5" path="res://Asset-Scripts/Card/dealer_card_display.gd" id="4_d5x1h"]
+[ext_resource type="Texture2D" uid="uid://cl0kpo2fo2yyi" path="res://Asset-Scripts/start.png" id="6_7ycvg"]
+[ext_resource type="Texture2D" uid="uid://ceei6a2uk01qe" path="res://Asset-Scripts/try again.png" id="7_wr18j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wr18j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qwutr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66tet"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ycvg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_671wp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mo76n"]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_0f027")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BetLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 63.0
-offset_top = 553.0
-offset_right = 103.0
-offset_bottom = 576.0
-text = "1"
-
-[node name="DecreaseBet" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 59.0
-offset_top = 591.0
-offset_right = 91.0
-offset_bottom = 622.0
-text = "-$1"
-
-[node name="IncreaseBet" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 503.0
-offset_right = 89.0
-offset_bottom = 534.0
-text = "+$1"
-
-[node name="TurnLabel" type="Label" parent="Control"]
-layout_mode = 1
-offset_right = 86.0
-offset_bottom = 23.0
-text = "Hello world!"
-
-[node name="DealerHandLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 24.0
-offset_right = 103.0
-offset_bottom = 47.0
-text = "Dealer value:"
-
-[node name="PlayerHandLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 48.0
-offset_right = 95.0
-offset_bottom = 71.0
-text = "Your value:"
-
-[node name="DealerHandValue" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 106.0
-offset_top = 25.0
-offset_right = 208.0
-offset_bottom = 48.0
-text = "0"
-
-[node name="PlayerHandValue" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 93.0
-offset_top = 49.0
-offset_right = 186.0
-offset_bottom = 72.0
-text = "0"
-
-[node name="History" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 963.0
-offset_top = 78.0
-offset_right = 1076.0
-offset_bottom = 101.0
-text = "Round history:"
-
-[node name="HitButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 464.0
-offset_top = 525.0
-offset_right = 495.0
-offset_bottom = 556.0
-text = "Hit"
-
-[node name="StandButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 664.0
-offset_top = 514.0
-offset_right = 717.0
-offset_bottom = 545.0
-text = "Stand"
-
-[node name="StartButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 109.0
-offset_top = 552.0
-offset_right = 162.0
-offset_bottom = 583.0
-text = "Start"
-
-[node name="MoneyLabel" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 1018.0
-offset_top = 14.0
-offset_right = 1075.0
-offset_bottom = 37.0
-text = "Money:"
-
-[node name="CurrentMoney" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = 1078.0
-offset_top = 15.0
-offset_right = 1118.0
-offset_bottom = 38.0
-text = "1"
-
-[node name="TryAgainButton" type="Button" parent="Control"]
-visible = false
-layout_mode = 0
-offset_left = 542.0
-offset_top = 584.0
-offset_right = 623.0
-offset_bottom = 615.0
-text = "Try Again"
 
 [node name="PlayerDisplay" type="Node2D" parent="."]
 script = ExtResource("2_gyfs4")
@@ -222,6 +115,151 @@ visible = false
 position = Vector2(900.5, 200.5)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_d5x1h")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BetLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 553.0
+offset_right = 103.0
+offset_bottom = 576.0
+text = "1"
+
+[node name="DecreaseBet" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 576.0
+offset_right = 243.0
+offset_bottom = 776.0
+scale = Vector2(0.25, 0.25)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wr18j")
+icon = ExtResource("2_66tet")
+
+[node name="IncreaseBet" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 506.0
+offset_right = 243.0
+offset_bottom = 706.0
+scale = Vector2(0.25, 0.25)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qwutr")
+icon = ExtResource("3_7ycvg")
+
+[node name="TurnLabel" type="Label" parent="Control"]
+layout_mode = 1
+offset_right = 86.0
+offset_bottom = 23.0
+text = "Hello world!"
+
+[node name="DealerHandLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 24.0
+offset_right = 103.0
+offset_bottom = 47.0
+text = "Dealer value:"
+
+[node name="PlayerHandLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 48.0
+offset_right = 95.0
+offset_bottom = 71.0
+text = "Your value:"
+
+[node name="DealerHandValue" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 25.0
+offset_right = 208.0
+offset_bottom = 48.0
+text = "0"
+
+[node name="PlayerHandValue" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 49.0
+offset_right = 186.0
+offset_bottom = 72.0
+text = "0"
+
+[node name="History" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 963.0
+offset_top = 78.0
+offset_right = 1076.0
+offset_bottom = 101.0
+text = "Round history:"
+
+[node name="HitButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 500.0
+offset_right = 1008.0
+offset_bottom = 908.0
+scale = Vector2(0.25, 0.25)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_66tet")
+icon = ExtResource("2_hq1ik")
+
+[node name="StandButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 500.0
+offset_right = 1208.0
+offset_bottom = 908.0
+scale = Vector2(0.25, 0.25)
+theme_override_constants/align_to_largest_stylebox = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7ycvg")
+icon = ExtResource("3_nfk4m")
+
+[node name="StartButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 513.0
+offset_right = 416.0
+offset_bottom = 713.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_671wp")
+icon = ExtResource("6_7ycvg")
+
+[node name="MoneyLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1018.0
+offset_top = 14.0
+offset_right = 1075.0
+offset_bottom = 37.0
+text = "Money:"
+
+[node name="CurrentMoney" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1078.0
+offset_top = 15.0
+offset_right = 1118.0
+offset_bottom = 38.0
+text = "1"
+
+[node name="TryAgainButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 420.0
+offset_top = 190.0
+offset_right = 728.0
+offset_bottom = 398.0
+scale = Vector2(0.75, 0.75)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mo76n")
+icon = ExtResource("7_wr18j")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 553.0
+offset_right = 92.0
+offset_bottom = 576.0
+text = "$"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
