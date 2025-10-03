@@ -108,15 +108,20 @@ class Round extends RefCounted:
 		self.dealer_hand = Hand.new()
 	
 	func start() -> void:
-		var give_cards = func (hand: Hand) -> void:
+		var give_cards_player = func (hand: Hand) -> void:
 			for i in range(0, 2):
 				var card = self.deck.draw()
 				card._check_card()
 				hand.push_card(card)
 				player_card_drawn.emit( Suit.keys()[card.suit],Rank.keys()[card.rank],player_or_dealer)
-		give_cards.call(player_hand)
+		give_cards_player.call(player_hand)
 		player_or_dealer = 1
-		give_cards.call(dealer_hand)
+		var give_cards_dealer = func (hand: Hand) -> void:
+			var card = self.deck.draw()
+			card._check_card()
+			hand.push_card(card)
+			player_card_drawn.emit( Suit.keys()[card.suit],Rank.keys()[card.rank],player_or_dealer)
+		give_cards_dealer.call(dealer_hand)
 		player_or_dealer = 0
 		
 		self.playing_hand = self.dealer_hand
