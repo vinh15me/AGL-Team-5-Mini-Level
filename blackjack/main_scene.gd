@@ -3,6 +3,7 @@ extends Node2D
 const blackjackGame = preload("res://cards.gd")
 var game = blackjackGame.Game.new()
 var currentBet:int = 1 
+var game_ended:bool = false
 
 signal send_data_to_player(suit: String, rank: String)
 signal send_data_to_dealer(suit: String, rank: String)
@@ -84,6 +85,7 @@ func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 		$Control/HitButton.visible = false
 		$Control/StandButton.visible = false
 		$Control/YouTied.visible = true
+		game_ended = true
 		return "game ended in draw"
 	
 	var was_natural = game.currentRound.turns == 0
@@ -98,6 +100,7 @@ func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 				historyEntry += "natural "
 			historyEntry += "blackjack."
 		$Control/YouWin.visible = true
+		$RandomGuy.animation = "happy"
 	elif (outcome == blackjackGame.RoundOutcome.DealerWin):
 		var player_hand_status = game.currentRound.player_hand.analyze()
 		historyEntry = "Dealer won "
@@ -108,11 +111,13 @@ func win_translator(outcome: blackjackGame.RoundOutcome) -> String:
 				historyEntry += "natural "
 			historyEntry += "blackjack."
 		$Control/YouLose.visible = true
+		$RandomGuy.animation = "sad"
 	print(historyEntry)
 	update_money()
 	$Control/TryAgainButton.visible = true
 	$Control/HitButton.visible = false
 	$Control/StandButton.visible = false
+	game_ended = true
 	return historyEntry
 	
 func _on_try_again_button_pressed() -> void:
@@ -125,10 +130,12 @@ func _on_start_button_pressed() -> void:
 	var outcome = game.start()
 	Globals.spend(currentBet)
 	append_history(win_translator(outcome))
-	update_turn()
-	update_money()
 	$Control/StartButton.visible = false
 	$Control/DecreaseBet.visible = false
 	$Control/IncreaseBet.visible = false
-	$Control/HitButton.visible = true
-	$Control/StandButton.visible = true
+	
+	if game_ended == false:
+		$Control/HitButton.visible = true
+		$Control/StandButton.visible = true
+	update_turn()
+	update_money()

@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b5o8y5wesc20s"]
+
+[ext_resource type="FontFile" uid="uid://ctueb6vbv5vy2" path="res://Asset-Scripts/UglykidsRegular-MmLp.otf" id="1_mdr0q"]
+
+[resource]
+font = ExtResource("1_mdr0q")
+font_size = 40
+outline_size = 1

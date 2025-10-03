@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bt6ofygv6cssg"]
+[gd_scene load_steps=23 format=3 uid="uid://bt6ofygv6cssg"]
 
 [ext_resource type="Script" uid="uid://de0gd1onox2n" path="res://main_scene.gd" id="1_0f027"]
 [ext_resource type="Texture2D" uid="uid://bop6e8118igrp" path="res://Asset-Scripts/decrease.png" id="2_66tet"]
@@ -9,10 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://5oiso5suerbx" path="res://Asset-Scripts/stand.png" id="3_nfk4m"]
 [ext_resource type="Script" uid="uid://bnikl0wfxvhs5" path="res://Asset-Scripts/Card/dealer_card_display.gd" id="4_d5x1h"]
 [ext_resource type="Texture2D" uid="uid://cl0kpo2fo2yyi" path="res://Asset-Scripts/start.png" id="6_7ycvg"]
+[ext_resource type="LabelSettings" uid="uid://b5o8y5wesc20s" path="res://Asset-Scripts/labelsettings.tres" id="6_m35m6"]
 [ext_resource type="Texture2D" uid="uid://ceei6a2uk01qe" path="res://Asset-Scripts/try again.png" id="7_wr18j"]
 [ext_resource type="Texture2D" uid="uid://dgrg72khwy4ku" path="res://Asset-Scripts/you lose.png" id="11_mo76n"]
 [ext_resource type="Texture2D" uid="uid://c45804bxje066" path="res://Asset-Scripts/you win.png" id="11_qwutr"]
 [ext_resource type="Texture2D" uid="uid://kc1dcmasddiw" path="res://Asset-Scripts/you tied.png" id="12_42l1d"]
+[ext_resource type="SpriteFrames" uid="uid://dgiimvlt0hohl" path="res://Asset-Scripts/RandomGuy/RandomGuy.tres" id="15_2jcla"]
 [ext_resource type="Texture2D" uid="uid://qabr0qmvxe22" path="res://Asset-Scripts/Background/hopefully background.png" id="15_m35m6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wr18j"]
@@ -139,12 +141,12 @@ offset_bottom = 40.0
 
 [node name="BetLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 63.000004
-offset_top = 529.0
+offset_left = 63.0
+offset_top = 530.0
 offset_right = 103.0
-offset_bottom = 552.0
-scale = Vector2(2.5, 2.5)
+offset_bottom = 579.0
 text = "1"
+label_settings = ExtResource("6_m35m6")
 
 [node name="DecreaseBet" type="Button" parent="Control"]
 layout_mode = 0
@@ -167,42 +169,45 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_qwutr")
 icon = ExtResource("3_7ycvg")
 
 [node name="TurnLabel" type="Label" parent="Control"]
+visible = false
 layout_mode = 1
-offset_right = 86.0
+offset_right = 93.0
 offset_bottom = 23.0
 text = "Hello world!"
 
 [node name="DealerHandLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 24.0
-offset_right = 103.0
-offset_bottom = 47.0
-text = "Dealer value:"
+offset_left = 4.0
+offset_right = 273.0
+offset_bottom = 49.0
+text = "Dealer value - "
+label_settings = ExtResource("6_m35m6")
 
 [node name="PlayerHandLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 48.0
-offset_right = 95.0
-offset_bottom = 71.0
-text = "Your value:"
+offset_left = 5.0
+offset_top = 50.0
+offset_right = 211.0
+offset_bottom = 99.0
+text = "Your value -"
+label_settings = ExtResource("6_m35m6")
 
 [node name="DealerHandValue" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 106.0
-offset_top = 25.0
-offset_right = 208.0
-offset_bottom = 48.0
+offset_left = 270.0
+offset_right = 372.0
+offset_bottom = 49.0
 text = "0"
+label_settings = ExtResource("6_m35m6")
 
 [node name="PlayerHandValue" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 93.0
-offset_top = 49.0
-offset_right = 186.0
-offset_bottom = 72.0
+offset_left = 230.0
+offset_top = 50.0
+offset_right = 323.0
+offset_bottom = 99.0
 text = "0"
+label_settings = ExtResource("6_m35m6")
 
 [node name="History" type="Label" parent="Control"]
 layout_mode = 0
@@ -245,39 +250,39 @@ icon = ExtResource("6_7ycvg")
 
 [node name="HighestLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 944.0
-offset_top = 58.0
-offset_right = 1008.0
-offset_bottom = 81.0
-scale = Vector2(2, 2)
-text = "Highest:"
+offset_left = 912.0
+offset_top = 57.0
+offset_right = 1065.0
+offset_bottom = 106.0
+text = "Highest -"
+label_settings = ExtResource("6_m35m6")
 
 [node name="HighestMoney" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 1076.0
-offset_top = 59.0
-offset_right = 1116.0
-offset_bottom = 82.0
-scale = Vector2(2, 2)
+offset_left = 1079.0
+offset_top = 54.0
+offset_right = 1119.0
+offset_bottom = 103.0
 text = "1"
+label_settings = ExtResource("6_m35m6")
 
 [node name="MoneyLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 959.0
-offset_top = 14.0
-offset_right = 1016.0
-offset_bottom = 37.0
-scale = Vector2(2, 2)
-text = "Money:"
+offset_left = 942.0
+offset_top = 17.0
+offset_right = 1065.0
+offset_bottom = 66.0
+text = "Money -"
+label_settings = ExtResource("6_m35m6")
 
 [node name="CurrentMoney" type="Label" parent="Control"]
 layout_mode = 0
 offset_left = 1078.0
-offset_top = 15.0
+offset_top = 14.0
 offset_right = 1118.0
-offset_bottom = 38.0
-scale = Vector2(2, 2)
+offset_bottom = 63.0
 text = "1"
+label_settings = ExtResource("6_m35m6")
 
 [node name="TryAgainButton" type="Button" parent="Control"]
 visible = false
@@ -307,15 +312,21 @@ texture = ExtResource("11_qwutr")
 
 [node name="MoneySymbolLabel" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 38.000004
-offset_top = 528.0
-offset_right = 78.0
-offset_bottom = 551.0
-scale = Vector2(2.5, 2.5)
+offset_left = 43.0
+offset_top = 532.0
+offset_right = 83.0
+offset_bottom = 581.0
 text = "$"
+label_settings = ExtResource("6_m35m6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
+
+[node name="RandomGuy" type="AnimatedSprite2D" parent="."]
+position = Vector2(1042, 221)
+sprite_frames = ExtResource("15_2jcla")
+autoplay = "default"
+frame_progress = 0.6448244
 
 [connection signal="pressed" from="Control/DecreaseBet" to="." method="_on_decrease_bet_pressed"]
 [connection signal="pressed" from="Control/IncreaseBet" to="." method="_on_increase_bet_pressed"]
