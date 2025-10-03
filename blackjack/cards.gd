@@ -43,6 +43,7 @@ class Deck extends RefCounted:
 
 class Hand extends RefCounted:
 	var cards: Array[Card]
+	var num_of_ace:int = 0
 	
 	func _calc_value(card: Card, count_ace: bool = true):
 		# need to handle whether Ace is 11 or 1 
@@ -58,8 +59,14 @@ class Hand extends RefCounted:
 		
 	func value():
 		var val: int = 0
+		var aces: int = 0
 		for card in cards:
 			val += self._calc_value(card)
+			if card.rank == 0:
+				aces+=1
+		while val > 21 && aces > 0:
+			val -= 10
+			aces -= 1
 		return val
 		
 	func analyze():

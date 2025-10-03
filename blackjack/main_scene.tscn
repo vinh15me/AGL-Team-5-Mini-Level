@@ -14,6 +14,30 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="BetLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 553.0
+offset_right = 103.0
+offset_bottom = 576.0
+text = "1"
+
+[node name="DecreaseBet" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 59.0
+offset_top = 591.0
+offset_right = 91.0
+offset_bottom = 622.0
+text = "-$1"
+
+[node name="IncreaseBet" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 503.0
+offset_right = 89.0
+offset_bottom = 534.0
+text = "+$1"
+
 [node name="TurnLabel" type="Label" parent="Control"]
 layout_mode = 1
 offset_right = 86.0
@@ -54,10 +78,10 @@ text = "0"
 
 [node name="History" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 73.0
-offset_right = 116.0
-offset_bottom = 96.0
+offset_left = 963.0
+offset_top = 78.0
+offset_right = 1076.0
+offset_bottom = 101.0
 text = "Round history:"
 
 [node name="HitButton" type="Button" parent="Control"]
@@ -83,6 +107,31 @@ offset_top = 552.0
 offset_right = 162.0
 offset_bottom = 583.0
 text = "Start"
+
+[node name="MoneyLabel" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1018.0
+offset_top = 14.0
+offset_right = 1075.0
+offset_bottom = 37.0
+text = "Money:"
+
+[node name="CurrentMoney" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 1078.0
+offset_top = 15.0
+offset_right = 1118.0
+offset_bottom = 38.0
+text = "1"
+
+[node name="TryAgainButton" type="Button" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 542.0
+offset_top = 584.0
+offset_right = 623.0
+offset_bottom = 615.0
+text = "Try Again"
 
 [node name="PlayerDisplay" type="Node2D" parent="."]
 script = ExtResource("2_gyfs4")
@@ -126,12 +175,6 @@ texture = ExtResource("3_d5x1h")
 [node name="Sprite2D7" type="Sprite2D" parent="PlayerDisplay"]
 visible = false
 position = Vector2(900, 400)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_d5x1h")
-
-[node name="Sprite2D8" type="Sprite2D" parent="PlayerDisplay"]
-visible = false
-position = Vector2(1025, 400)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_d5x1h")
 
@@ -180,12 +223,12 @@ position = Vector2(900.5, 200.5)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_d5x1h")
 
-[node name="Sprite2D10" type="Sprite2D" parent="DealerDisplay"]
-visible = false
-position = Vector2(1025.5, 200.5)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_d5x1h")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
 
+[connection signal="pressed" from="Control/DecreaseBet" to="." method="_on_decrease_bet_pressed"]
+[connection signal="pressed" from="Control/IncreaseBet" to="." method="_on_increase_bet_pressed"]
 [connection signal="pressed" from="Control/HitButton" to="." method="_on_hit_button_pressed"]
 [connection signal="pressed" from="Control/StandButton" to="." method="_on_stand_button_pressed"]
 [connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Control/TryAgainButton" to="." method="_on_try_again_button_pressed"]

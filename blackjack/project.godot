@@ -14,3 +14,7 @@ config/name="Blackjack"
 run/main_scene="uid://bt6ofygv6cssg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Globals="*res://globals.gd"
