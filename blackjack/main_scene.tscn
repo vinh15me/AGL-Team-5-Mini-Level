@@ -244,6 +244,7 @@ offset_bottom = 38.0
 text = "1"
 
 [node name="TryAgainButton" type="Button" parent="Control"]
+visible = false
 layout_mode = 0
 offset_left = 420.0
 offset_top = 190.0
